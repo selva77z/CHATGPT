@@ -1,0 +1,81 @@
+Post to Sheet 
+
+
+
+openapi: 3.1.0
+info:
+  title: Google Sheets Journal Logger API
+  description: API to log daily journal entries into Google Sheets via a Google Apps Script Web App.
+  version: 1.0.0
+
+servers:
+  - url: https://script.google.com/macros/s/AKfycbwWOPuAnnSlHNFKP2I7W_NEK32zpbV3zuuF0OnVuyLWqSrjW2egIIRC07MzNa71RpOjEw/exec
+    description: Google Apps Script Web App URL
+
+paths:
+  /exec:
+    post:
+      operationId: postJournalToSheet
+      summary: Log journal entry to Google Sheets
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                date:
+                  type: string
+                  format: date
+                  example: "2025-03-30"
+                  description: Date of the journal entry
+                mood:
+                  type: string
+                  example: "Happy"
+                sleep:
+                  type: string
+                  example: "7 hours"
+                food:
+                  type: string
+                  example: "Healthy"
+                skin:
+                  type: string
+                  example: "Clear"
+                emotions:
+                  type: string
+                  example: "Calm and centered"
+                triggers:
+                  type: string
+                  example: "None"
+                notes:
+                  type: string
+                  example: "Felt really productive today"
+              required:
+                - date
+      responses:
+        '200':
+          description: Successfully saved journal entry to Google Sheet
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "success"
+                  message:
+                    type: string
+                    example: "Data saved"
+        '400':
+          description: Error logging data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "error"
+                  message:
+                    type: string
+                    example: "Invalid input or script error"
