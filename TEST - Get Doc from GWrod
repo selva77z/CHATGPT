@@ -1,0 +1,34 @@
+openapi: 3.1.0
+info:
+  title: Google Docs Content API
+  description: API to retrieve Google Doc content.
+  version: 1.0.0
+servers:
+  - url: https://script.google.com/macros/s/AKfycbyQ28aeeIDlwq39-n2hMRxPHjLnDJj8LLilYjOzELvD7cxITBXTuc076ji5dYDRr1lr/exec 
+    description: Google Apps Script Web App URL
+paths:
+  /exec:
+    get:
+      operationId: getDocContent
+      summary: Retrieve Google Doc content
+      responses:
+        '200':
+          description: Successfully retrieved content
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  content:
+                    type: string
+                    description: Google Doc text content
+        '400':
+          description: Error retrieving content
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error message
